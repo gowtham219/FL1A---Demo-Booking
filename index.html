@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Book a Demo</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: url('https://fairlink.ae/wp-content/uploads/2025/06/FAIR-SINGLE-DISC-POLISHING-MACHINE-FL1A.png') no-repeat center center fixed;
+    background-size: cover;
+    padding: 2rem;
+  }
+  form {
+    background: rgba(255, 255, 255, 0.9); /* semi-transparent white for readability */
+    padding: 1.5rem;
+    border-radius: 6px;
+    max-width: 400px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+  }
+  input, button {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  button {
+    margin-top: 1.5rem;
+    background-color: #4285F4;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #357ae8;
+  }
+  .success-msg {
+    color: green;
+    margin-top: 1rem;
+    text-align: center;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<form id="demoForm">
+  <h2>Book a Demo</h2>
+  
+  <label for="name">Name</label>
+  <input id="name" name="Name" required />
+  
+  <label for="email">Email</label>
+  <input id="email" type="email" name="Email" required />
+  
+  <label for="phone">Phone</label>
+  <input id="phone" name="Phone" required />
+  
+  <label for="date">Preferred Date</label>
+  <input id="date" type="date" name="PreferredDate" required />
+  
+  <label for="company">Company</label>
+  <input id="company" name="Company" required />
+  
+  <button type="submit">Submit</button>
+  
+  <div class="success-msg" id="successMsg">
+    Thank you! Your demo booking has been submitted.
+  </div>
+</form>
+
+<script>
+  const form = document.getElementById('demoForm');
+  const successMsg = document.getElementById('successMsg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const data = {
+      Name: form.Name.value,
+      Email: form.Email.value,
+      Phone: form.Phone.value,
+      PreferredDate: form.PreferredDate.value,
+      Company: form.Company.value
+    };
+
+    try {
+      const response = await fetch(https://script.google.com/macros/s/AKfycbxIA3ssmsWE8KMuFBeavBWmZ-6fxACZkuxIW98YI9bo6YB7r2uWkTMdQ7EqoCzQ_k7cwQ/exec, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const result = await response.json();
+
+      if (result.result === 'success') {
+        form.reset();
+        successMsg.style.display = 'block';
+      } else {
+        alert('Error submitting form: ' + (result.message || 'Unknown error'));
+      }
+    } catch (error) {
+      alert('Network error. Please try again later.');
+    }
+  });
+</script>
+
+</body>
+</html>
